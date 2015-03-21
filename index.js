@@ -1,9 +1,8 @@
 var five = require("johnny-five"),
+	PolarArm = require("./polararm"),
 	board, servos;
 
 board = new five.Board();
-
-var l = 17;
 
 board.on("ready", function() {
 
@@ -16,90 +15,55 @@ board.on("ready", function() {
 	};
 	servos.claw.center();
 	servos.arm.center();
-
-	// Inject the `servo` hardware into
-	// the Repl instance's context;
-	// allows direct command line access
-	var inverval = 0;
-	var step = 0;
-	var maxStep = 7;
-	var cycle = 0;
+	
+	var polar = new PolarArm( 17 );
+	var positions = [
+		{ x: 20, y: 20 },
+		{ x: 20, y: 10 },
+		{ x: 10, y: 10 },
+		{ x: 10, y: 20 }
+	];
+	var i = 0;
+	var current, next;
+	var step = 0.1;
+	var changeInterval, step;
+	var change = function( i ) {
+		current = positions[ i % positions.length ];
+		next = positions[ (i + 1) % positions.length ];
+	}
 	board.repl.inject({
 		s: servos,
-		d: d,
-		move: move,
-		stop: function() { 
-			step = 0;
-			maxStep = 7;
-			cycle = 0;
-			servos.claw.center();
-			servos.arm.center();
-			clearInterval( interval ) 
-		},
-		square: function() {
-			interval = setInterval(function() {
-				switch( cycle ) {
-					case 0:
-						move( 17 - step, 17 );
-						break;
-					case 1:
-						move( 17 - maxStep, 17 - step );
-						break;
-					case 2:
-						move( 17 - maxStep + step, 17 - maxStep );
-						break;
-					case 3:
-						move( 17, 17 - maxStep + step );
-						break;
-					default:
-					break;
-				}
-				step += 0.5;
+		arm: new PolarArm( 17 ),
+		start: function() {
+			current = positions[ i % positions.length ];
+			next = positions[ (i + 1) % positions.length ];
 
-				if( step > maxStep ) {
-					step = 0;
-					cycle++;
-				}
-				if( cycle > 3 ) {
-					cycle = 0;
+			step = setInterval(function() {
+				current = {
+					x: polar.lerp( current.x, next.x, 0.1 ),
+					y: polar.lerp( current.y, next.y, 0.1 )
 				};
-			}, 50)
+				var data = polar.move( 
+					current.x, 
+					current.y 
+				);
+				servos.arm.to( data.arm );
+				servos.claw.to( data.claw );
+
+				console.log( current, next );
+				if( 
+					current.x.toFixed( 1 ) == next.x.toFixed( 1 )
+					&& current.y.toFixed( 1 ) == next.y.toFixed( 1 )
+				) {
+					i++;
+					change( i );
+				}
+			}, 20);
+			
+		},
+		stop: function() {
+			clearInterval( step );
 		}
 	});
 
 });
-
-var toDegrees = function( radians ) {
-	return radians * ( 180 / Math.PI );
-}
-var toRadians = function( degrees ) {
-	return degrees * ( Math.PI / 180 );
-}
-
-var move = function( x, y ) {
-	var claw = toDegrees( beta( x, y, l ) );
-	var arm = toDegrees( teta( x, y ) + alpha( x, y, l ) );
-	servos.claw.to( claw );
-	servos.arm.to( arm );
-	return {
-		claw: claw,
-		arm: arm
-	}
-}
-
-var d = function( x, y ) {
-	return Math.sqrt( Math.pow( x, 2 ) + Math.pow( y, 2 ) );
-}
-
-var alpha = function( x, y ) {
-	var b = Math.sqrt( Math.pow( l, 2 ) - ( ( Math.pow( x, 2 ) + Math.pow( y, 2 ) ) / 4 ) );
-	return Math.asin( b / l );
-}
-
-var beta = function( x, y ) {
-	return toRadians( 180 ) - ( 2 * alpha( x, y, l ) );
-}
-
-var teta = function( x, y ) {
-	return Math.atan2( y, x );
-}

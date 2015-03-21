@@ -1,0 +1,54 @@
+<!doctype html>
+<!--[if lt ie 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if ie 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if ie 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt ie 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Polar arm simulator</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				background: #ccc;
+			}
+			#stage {
+				position: relative;
+				background: #fff;
+				width: 800px;
+				height: 600px;
+			}
+			.segment {
+				background: #aaa;
+				position: absolute;
+				width: 300px;
+				height: 10px;
+			}
+			#polar {
+				position: absolute;
+				height: 5px;
+				background: #000;
+				min-width: 10px;
+				bottom: 0px;
+				left: 0px;
+			}
+			#cursor {
+				position: absolute;
+				padding-left: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="stage">
+			<div id="polar"></div>
+			<div class="segment" id="arm"></div>
+			<div class="segment" id="claw"></div>
+			<div id="cursor">x</div>
+		</div>
+		<script src="../polararm.js"></script>
+		<script src="simulator.js"></script>
+	</body>
+</html>
