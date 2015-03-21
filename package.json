@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "johnny-five": "*"
+    "johnny-five": "*",
+    "socket.io": "*",
+    "express": "*"
   },
   "author": "Murilo Polese",
   "license": "ISC"
