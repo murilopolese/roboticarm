@@ -5,16 +5,16 @@ window.onload = function() {
 
 	// Set initial position
 	armSize = 300;
-	origin = { top: 600, left: 0 };
+	origin = { top: 600, left: 200 };
 	clawPosition = { top: origin.top, left: origin.left + armSize }
 	setPosition( arm, origin );
 	setPosition( claw, clawPosition );
 	
 	var positions = [
 		{ x: 300, y: 300 },
-		{ x: 300, y: 100 },
-		{ x: 100, y: 100 },
-		{ x: 100, y: 300 }
+		{ x: 300, y: 200 },
+		{ x: 200, y: 200 },
+		{ x: 200, y: 300 }
 	];
 	var i = 0;
 	var current, next;
@@ -53,7 +53,7 @@ var move = function( x, y, arm, claw ) {
 
 	var cursor = document.getElementById( 'cursor' );
 	cursor.style.top = y + 'px';
-	cursor.style.left = x + 'px';
+	cursor.style.left = ( x + origin.left ) + 'px';
 
 	data.claw = polar.toDegrees( polar.alpha( x, relY ) - polar.teta( x, relY ) );
 	rotate( arm, - data.arm );
@@ -61,7 +61,7 @@ var move = function( x, y, arm, claw ) {
 
 	var clawPosition = {
 		top: origin.top - armSize * Math.sin( polar.toRadians( data.arm ) ),
-		left: armSize * Math.cos( polar.toRadians( data.arm ) )
+		left: ( armSize * Math.cos( polar.toRadians( data.arm ) ) ) + origin.left
 	}
 	setPosition( claw, clawPosition );
 }

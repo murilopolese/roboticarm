@@ -1,0 +1,13 @@
+{
+	"name": "strawrm-johnny-five",
+	"version": "0.0.1",
+	"description": "Strawbees arm",
+	"main": "index.js",
+	"scripts": {
+	},
+	"dependencies": {
+		"johnny-five": "*"
+	},
+	"author": "Murilo Polese",
+	"license": "WTFPL"
+}

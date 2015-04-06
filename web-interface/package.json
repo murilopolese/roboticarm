@@ -1,0 +1,15 @@
+{
+	"name": "strawrm-webui",
+	"version": "0.0.1",
+	"description": "Strawbees arm",
+	"main": "web.js",
+	"scripts": {
+	},
+	"dependencies": {
+		"johnny-five": "*",
+		"socket.io": "*",
+		"express": "*"
+	},
+	"author": "Murilo Polese",
+	"license": "WTFPL"
+}

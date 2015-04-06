@@ -1,10 +1,10 @@
-var five = require("johnny-five"),
-	PolarArm = require("./polararm"),
+var five = require( 'johnny-five' ),
+	PolarArm = require( '../polararm' ),
 	board, servos;
 
 board = new five.Board();
 
-board.on("ready", function() {
+board.on( 'ready', function() {
 
 	servos = {
 		claw: five.Servo({

@@ -13,13 +13,21 @@
 			body {
 				margin: 0;
 				padding: 0;
+				position: absolute;
+				width: 100%;
+				height: 100%;
 				background: #ccc;
+				font-family: 'Arial';
 			}
 			#stage {
-				position: relative;
+				position: absolute;
 				background: #fff;
 				width: 800px;
 				height: 600px;
+				top: 50%;
+				left: 50%;
+				margin-top: -300px;
+				margin-left: -400px;
 			}
 			.segment {
 				background: #aaa;
@@ -27,17 +35,22 @@
 				width: 300px;
 				height: 10px;
 			}
-			#polar {
-				position: absolute;
-				height: 5px;
-				background: #000;
-				min-width: 10px;
-				bottom: 0px;
-				left: 0px;
-			}
 			#cursor {
 				position: absolute;
-				padding-left: 20px;
+				padding-left: 5px;
+			}
+			.what-is-this {
+				position: absolute;
+				width: 100%;
+				height: 18px;
+				bottom: 36px;
+				text-align: center;
+				font-size: 18px;
+			}
+			a:link, a:hover, a:active, a:visited {
+				text-decoration: none;
+				color: #000;
+				font-weight: bold;
 			}
 		</style>
 	</head>
@@ -47,6 +60,13 @@
 			<div class="segment" id="arm"></div>
 			<div class="segment" id="claw"></div>
 			<div id="cursor">x</div>
+		</div>
+		<div class="what-is-this">
+			<p>
+				<a target="_blank" href="https://medium.com/@murilopolese/drinking-straws-robots-and-some-math-27f8349ad644">
+					What is this?
+				</a>
+			</p>
 		</div>
 		<script src="../polararm.js"></script>
 		<script src="simulator.js"></script>
