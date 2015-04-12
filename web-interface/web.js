@@ -1,6 +1,6 @@
 // ARDUINO
 var five = require("johnny-five");
-var PolarArm = require("./polararm");
+var PolarArm = require("../polararm");
 
 var board = new five.Board();
 var servos;
@@ -33,7 +33,7 @@ var http = require( 'http' ).Server(app);
 var io = require( 'socket.io' )(http);
 
 app.get( '/', function(req, res){
-	res.sendfile( 'web/index.html' );
+	res.sendfile( 'index.html' );
 });
 
 io.on('connection', function( socket ){
@@ -50,4 +50,3 @@ io.on('connection', function( socket ){
 http.listen( 3000, function(){
 	console.log( 'listening on *:3000' );
 });
-
