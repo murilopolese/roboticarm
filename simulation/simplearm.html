@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Simple Arm</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			.segment {
+				position: absolute;
+				height: 20px;
+			}
+			#segment1 {
+				background: #999;
+			}
+			#segment2 {
+				background: #666;
+			}
+			#target {
+				position: absolute;
+				width: 20px;
+				height: 20px;
+				background: red;
+			}
+			#canvas {
+				position: relative;
+				background: #eee;
+			}
+		</style>
+    </head>
+    <body>
+		<div id="canvas">
+			<div id="segment1" class="segment"></div>
+			<div id="segment2" class="segment"></div>
+			<div id="segment3" class="segment"></div>
+			<div id="segment4" class="segment"></div>
+			<div id="target"></div>
+		</div>
+
+        <script src="../lib/utils.js"></script>
+        <script src="../lib/simplearm.js"></script>
+        <script src="simplearm-simulation.js"></script>
+    </body>
+</html>
