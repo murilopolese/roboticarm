@@ -1,25 +1,30 @@
 window.onload = function() {
 	var canvasSize = { width: 800, height: 600 };
-	var origin = { x: 300, y: 10 };
-	var origin2 = { x: 400, y: 10 };
+	var origin = { x: 150, y: 0 };
+	var origin2 = { x: 280, y: 0 };
 
-	var targetPosition = { x: 300, y: 200 };
-	var cursorPosition = { x: 300, y: 200 };
-
+	// var points = [
+	// 	{ x: 300, y: 200 },
+	// 	{ x: 300, y: 300 },
+	// 	{ x: 400, y: 300 },
+	// 	{ x: 400, y: 200 }
+	// ];
 	var points = [
-		{ x: 300, y: 200 },
-		{ x: 300, y: 300 },
-		{ x: 400, y: 300 },
-		{ x: 400, y: 200 }
+		{ x: 0 + origin.x, y: 200 + origin.y },
+	    { x: 130 + origin.x, y: 200 + origin.y },
+	    { x: 130 + origin.x, y: 270 + origin.y },
+	    { x: 0 + origin.x, y: 270 + origin.y }
 	];
+	var targetPosition = points[ 0 ];
+  	var cursorPosition = points[ 0 ];
 
 	var arm = new SimpleArm({
-		segmentSize1: 200,
-		segmentSize2: 200
+		segmentSize1: 170,
+		segmentSize2: 150
 	});
 	var arm2 = new SimpleArm({
-		segmentSize1: 200,
-		segmentSize2: 200
+		segmentSize1: 170,
+		segmentSize2: 150
 	});
 
 	var canvas = document.getElementById( 'canvas' );
@@ -72,7 +77,7 @@ window.onload = function() {
 			Math.abs( cursorPosition.y - origin2.y )
 		);
 
-		seg1.style.transform = 'rotate( ' + (-1*angles.angle1) + 'rad )';
+		seg1.style.transform = 'rotate( ' + -(angles.angle1) + 'rad )';
 		seg3.style.transform = 'rotate( ' + -(Math.PI - angles2.angle1) + 'rad )';
 
 		seg2.style.bottom = origin.y + 
