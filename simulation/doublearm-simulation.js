@@ -3,18 +3,13 @@ window.onload = function() {
 	var origin = { x: 150, y: 0 };
 	var origin2 = { x: 280, y: 0 };
 
-	// var points = [
-	// 	{ x: 300, y: 200 },
-	// 	{ x: 300, y: 300 },
-	// 	{ x: 400, y: 300 },
-	// 	{ x: 400, y: 200 }
-	// ];
 	var points = [
 		{ x: 0 + origin.x, y: 200 + origin.y },
 	    { x: 130 + origin.x, y: 200 + origin.y },
 	    { x: 130 + origin.x, y: 270 + origin.y },
 	    { x: 0 + origin.x, y: 270 + origin.y }
 	];
+	
 	var targetPosition = points[ 0 ];
   	var cursorPosition = points[ 0 ];
 
