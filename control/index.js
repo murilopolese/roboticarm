@@ -2,6 +2,7 @@ var five = require("johnny-five"),
   board = new five.Board(),
   SimpleArm = require("../lib/simplearm").SimpleArm,
   ArmUtils = require("../lib/simplearm").ArmUtils;
+  DoubleArm = require("../lib/simplearm").DoubleArm;
 
 board.on("ready", function() {
   servos = {
@@ -37,13 +38,14 @@ board.on("ready", function() {
   var arm = new DoubleArm({
     segmentSize1: 9.5,
     segmentSize2: 9.5,
-    distance: 8;
-  })
+    distance: 8
+  });
 
   var move = function( current, target ) {
+    var lerpFactor = 0.2;
     return {
-      x: ArmUtils.lerp( current.x, target.x, 0.1 ),
-      y: ArmUtils.lerp( current.y, target.y, 0.1 )
+      x: ArmUtils.lerp( current.x, target.x, lerpFactor ),
+      y: ArmUtils.lerp( current.y, target.y, lerpFactor )
     };
   };
 
@@ -53,10 +55,9 @@ board.on("ready", function() {
 
     // Iterate untill the 
     cursorPosition = move( cursorPosition, targetPosition );
-    console.log( cursorPosition );
 
     var a = arm.calculateAngles( cursorPosition.x, cursorPosition.y );
-    var angles = calculateAngles( cursorPosition.x, cursorPosition.y );
+    var angles = arm.calculateAngles( cursorPosition.x, cursorPosition.y );
 
     servos.servo1.to( ArmUtils.toDegrees( angles.angle1 ) );
     servos.servo2.to( ArmUtils.toDegrees( angles.angle2 ) );
@@ -74,7 +75,7 @@ board.on("ready", function() {
   board.repl.inject({
     servos: servos,
     step: step,
-    calculateAngles: calculateAngles,
+    calculateAngles: DoubleArm.calculateAngles,
     start: function() {
       setInterval( step, 50 );
     },
